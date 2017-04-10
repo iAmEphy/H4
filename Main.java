@@ -9,13 +9,60 @@ public class Main
     
     while(queueNode != null)
     {
+      newQ.enqueue(queueNode.value);
+      queueNode = queueNode.next;
     }
+    
+    return newQ;
   }
   
+  public static Stack moveQS(Queue inputQ)
+  {
+    Stack newS = new Stack();
+    String [] array = new String[inputQ.getLength()];
+    
+    Queue.Node pushNode = inputQ.razer;
+   
+    int setArray = 0;
+    
+    while(pushNode != null)
+    {
+      array[setArray] = pushNode.value;
+      setArray++;
+      
+      pushNode = pushNode.next;
+    }
+    
+    for(int x = array.length - 1; x >= 0; x--)
+    {
+      newS.push(array[x]);
+    }
+    return newS;
+  }
   
-  
-  
-  
+  public static Stack moveSS(Stack inputS)
+  {
+    Stack copy = new Stack();
+    String [] array = new String[inputS.getLength()];
+    
+    Stack.Node pushpushNode = inputS.top;
+    
+    int setArray = 0;
+    
+    while(pushpushNode != null)
+    {
+      array[setArray] = pushpushNode.value;
+      setArray++;
+      pushpushNode = pushpushNode.next;
+    }
+    
+    for(int x = array.length - 1; x >= 0; x--)
+    {
+      copy.push(array[x]);
+    }
+    return copy;
+  }
+
   public static void main(String [] args)
   {
     Stack stackTest = new Stack();
@@ -38,7 +85,7 @@ public class Main
     
     
     
-    System.out.println("Stack = " + queueTest + " has: ");
+    System.out.println("Queue = " + queueTest + " has: ");
     queueTest.enqueue("One");
     queueTest.enqueue("Two");
     queueTest.enqueue("Three");
@@ -53,70 +100,53 @@ public class Main
     System.out.println("Peeking the stack: " + queueTest);
     System.out.println(queueTest.peek());
     
+    System.out.println("Testing new stack & queue");
+    Stack stackTest2 = new Stack();
+    Queue queueTest2 = new Queue();
     
-    Stack testStack2 = new Stack(); //initializes testStack as new Stack
-  Queue testQueue2 = new Queue(); //initializes testQueue as new Queue
-  
-  System.out.println("\nThe second testStack, " + testStack2 + ", includes: ");
-  testStack2.push("One");
-  testStack2.push("Two");
-  testStack2.push("Three");
-  testStack2.push("Four");
-  testStack2.push("Five");
-  testStack2.push("Six");
-  testStack2.push("Seven");
-  testStack2.push("Eight");
-  testStack2.push("Nine");
-  testStack2.traverse();
-  
-  System.out.println("\nThe second testQueue, " + testQueue2 + ", includes: ");
-  testQueue2.enqueue("One");
-  testQueue2.enqueue("Two");
-  testQueue2.enqueue("Three");
-  testQueue2.enqueue("Four");
-  testQueue2.enqueue("Five");
-  testQueue2.enqueue("Six");
-  testQueue2.enqueue("Seven");
-  testQueue2.enqueue("Eight");
-  testQueue2.enqueue("Nine");
-  testQueue2.traverse();
-  
-  System.out.println();
-  
-  //testing moveStackToQueue method
-  System.out.println("Testing moveStackToQueue method: ");
-  Queue testQueue3 = new Queue();
-  
-  testQueue3 = moveStackToQueue(testStack2);
-  System.out.println("The Stack: ");
-  testStack2.traverseForwardAndPrint();
-  System.out.println("\nThe Queue: ");
-  testQueue3.traverseForwardAndPrint();
-  
-  System.out.println();
-  
-  //testing moveQueueToStack method
-  System.out.println("Testing moveQueueToStack method: ");
-  Stack testStack3 = new Stack();
-  
-  testStack3 = moveQueueToStack(testQueue2);
-  System.out.println("The Queue: ");
-  testQueue2.traverseForwardAndPrint();
-  System.out.println("\nThe Stack: ");
-  testStack3.traverseForwardAndPrint();
-  
-  System.out.println();
-  
-  //testing moveStackToStack method
-  System.out.println("Testing moveStackToStack method: ");
-  Stack testStack4 = new Stack();
-  
-  testStack4 = moveStackToStack(testStack2);
-  System.out.println("The Stack: ");
-  testStack2.traverseForwardAndPrint();
-  System.out.println("\nThe second Stack: ");
-  testStack4.traverseForwardAndPrint();
+    System.out.println("Stack = " + stackTest + " has: ");
+    stackTest2.push("One");
+    stackTest2.push("Two");
+    stackTest2.push("Three");
+    stackTest2.push("Four");
+    stackTest2.traverse();
+    
+    System.out.println("Queue = " + queueTest + " has: ");
+    queueTest2.enqueue("One");
+    queueTest2.enqueue("Two");
+    queueTest2.enqueue("Three");
+    queueTest2.enqueue("Four");
+    queueTest2.traverse();
+ 
 
+    System.out.println("Testing the method that moves stack to queue");
+    Queue queueTest3 = new Queue();
+    
+    queueTest3 = stackToQueue(stackTest2);
+    System.out.println("The stack has: ");
+    stackTest.traverse();
+    System.out.println("The queue has: ");
+    queueTest3.traverse();
+    
+    
+    System.out.println("Testing the method that moves queue to stack");
+    Stack stackTest3 = new Stack();
+    
+    stackTest3 = moveQS(queueTest2);
+    System.out.println("The queue has: ");
+    queueTest2.traverse();
+    System.out.println("The stack has: ");
+    stackTest3.traverse();
+    
+    System.out.println("Testing the method that moves stack to another stack");
+    Stack stackTest4 = new Stack();
+    
+    stackTest4 = moveSS(stackTest2);
+    System.out.println("The stack has: ");
+    stackTest2.traverse();
+    System.out.println("The next stack has: ");
+    stackTest4.traverse();
+    
   }
   
   
